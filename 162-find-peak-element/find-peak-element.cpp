@@ -10,7 +10,7 @@ public:
                 low = guess + 1;
             }
             else{
-                                
+                
                 high = guess ;
             }
         }
