@@ -1,19 +1,21 @@
 class Solution {
 public:
-int func(vector<vector<int>>&a,int n , int m , int guess){
-    int count  = 0;
+int func(vector<vector<int>>&a,int n, int m,int guess){
     int row = n-1;
     int col = 0;
-    while(row>=0 && col < m){
+    int count  = 0;
+    while(row >= 0 && col < m){
         if(a[row][col]<=guess){
             count += row + 1;
             col++;
+
         }
         else{
             row--;
         }
     }
     return count;
+    
 }
     int kthSmallest(vector<vector<int>>& matrix, int k) {
         int n = matrix.size();
@@ -22,9 +24,9 @@ int func(vector<vector<int>>&a,int n , int m , int guess){
         int high = matrix[n-1][m-1];
         int res = -1;
         while(low<=high){
-            int guess = (low + high)/2;
+            int guess = (low+high)/2;
             int ans = func(matrix,n,m,guess);
-            if(ans<k){
+            if(ans < k){
                 low = guess + 1;
             }
             else{
@@ -33,7 +35,6 @@ int func(vector<vector<int>>&a,int n , int m , int guess){
             }
         }
         return res;
-
         
     }
 };
