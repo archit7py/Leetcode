@@ -25,7 +25,7 @@ struct cmp{
                 pq.push(curr);
                 continue;
             }
-            if(curr.second < pq.top().second && curr.first == pq.top().first){
+            if(curr.second < pq.top().second ){
                 continue;
             }
             else if(curr.second > pq.top().second){
