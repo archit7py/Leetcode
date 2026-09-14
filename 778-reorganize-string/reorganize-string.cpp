@@ -1,83 +1,64 @@
 class Solution {
 public:
-
-    struct cmp {
-        bool operator()(pair<char,int>& a, pair<char,int>& b) {
-            if(a.second == b.second) {
-                return a.first < b.first;
-            }
-            return a.second < b.second;
+struct cmp{
+    bool operator()(pair<char,int>&a , pair<char,int>&b){
+        if(a.second == b.second){
+            return a.first<b.first;
         }
-    };
-
+        return a.second<b.second;
+        
+    }
+};
     string reorganizeString(string s) {
-
-        int n = s.size();
         string res = "";
         int seat = 0;
-
-        priority_queue<
-            pair<char,int>,
-            vector<pair<char,int>>,
-            cmp
-        > pq;
-
-        unordered_map<char,int> mp;
-
-        for(int i = 0; i < n; i++) {
+        priority_queue<pair<char,int>,vector<pair<char,int>>,cmp>pq;
+        unordered_map<char,int>mp;
+        for(int i= 0;i<s.size();i++){
             mp[s[i]]++;
         }
-
-        for(auto i : mp) {
+        for(auto i : mp){
             char word = i.first;
             int freq = i.second;
-
-            pair<char,int> curr = {word, freq};
-            pq.push(curr);
+            pair<char,int>p = {word,freq};
+            pq.push(p);
         }
 
-        while(!pq.empty()) {
-
-            pair<char,int> curr = pq.top();
+        while(!pq.empty()){
+            pair<char,int>p1 = pq.top();
             pq.pop();
 
-            // curr is different from previous character
-            if(seat == 0 || res[seat-1] != curr.first) {
-
-                res.push_back(curr.first);
+            if(seat == 0 || res[seat-1] != p1.first){
+                res.push_back(p1.first);
                 seat++;
+                p1.second--;
+                if(p1.second > 0){
+                    pq.push(p1);
 
-                curr.second--;
-
-                if(curr.second > 0) {
-                    pq.push(curr);
                 }
+                
+
             }
-
-            // curr is same as previous character
-            else {
-
-                if(pq.empty()) {
+            else{
+                if(pq.empty()){
                     return "";
                 }
+                else{
+                    pair<char,int>p2 = pq.top();
+                    pq.pop();
 
-                pair<char,int> curr1 = pq.top();
-                pq.pop();
-
-                res.push_back(curr1.first);
-                seat++;
-
-                curr1.second--;
-
-                if(curr1.second > 0) {
-                    pq.push(curr1);
+                    res.push_back(p2.first);
+                    seat++;
+                    p2.second--;
+                    if(p2.second > 0){
+                        pq.push(p2);
+                    }
                 }
-
-                // curr was not used, so put it back
-                pq.push(curr);
+                pq.push(p1);
             }
         }
-
         return res;
+        
+        
     }
 };
