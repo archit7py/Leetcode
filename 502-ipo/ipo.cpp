@@ -1,13 +1,12 @@
 class Solution {
 public:
-
     int findMaximizedCapital(int k, int w, vector<int>& profits, vector<int>& capital) {
+        vector<pair<int,int>>projects;
         priority_queue<int>pq;
         int n = profits.size();
-        vector<pair<int,int>>projects;
         int idx = 0;
         int i;
-        for(i=0;i<n;i++){
+        for(int i = 0;i<n;i++){
             projects.push_back({capital[i],profits[i]});
         }
         sort(projects.begin(),projects.end());
@@ -24,13 +23,13 @@ public:
                 return w;
             }
             else{
-                w = w + pq.top();
+                w += pq.top();
                 pq.pop();
-
             }
-
         }
         return w;
-        
+       
+
+
     }
 };
