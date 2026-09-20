@@ -4,11 +4,11 @@ void fun(vector<int>& a , int n, int idx, int sum, vector<int>& diary,vector<vec
     if(sum == target){
         res.push_back(diary);
         return;
-}
+    }
 
     if(idx == n || sum > target){
         return;
-}
+    }
     fun(a,n,idx+1,sum,diary,res,target);
     if(sum + a[idx] <= target){
         diary.push_back(a[idx]);
