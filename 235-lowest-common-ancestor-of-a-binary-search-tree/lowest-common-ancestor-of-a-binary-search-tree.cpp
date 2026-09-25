@@ -11,26 +11,33 @@
 class Solution {
 public:
     TreeNode* ans = nullptr;
-    int fun(TreeNode* root,TreeNode* p, TreeNode* q){
-        if(root == nullptr){
-            return 0 ;
+    void fun(TreeNode* node , TreeNode* p,TreeNode* q){
+        if(node == nullptr){
+            return ;
         }
-        int l = fun(root -> left, p,q);
-        int r = fun(root -> right, p,q);
-        int self = 0;
-        if(root == p || root == q){
-            self++;
+        else if(node == p || node == q){
+            ans = node;
+            return;
         }
-        int total = l + self + r;
-        if(total == 2 && ans == nullptr){
-            ans = root;
+        else if(node -> val < p -> val ){
+            fun(node -> right,p,q);
         }
-        return total;
+        else if(node -> val > q -> val){
+            fun(node -> left,p,q);
+        }
+        else{
+            ans = node;
+            return;
+        }
     }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        fun(root,p,q);
+        if(p-> val<q->val){
+            fun(root,p,q);
+        }
+        else{
+            fun(root,q,p);
+        }
         return ans;
-       
         
     }
 };
