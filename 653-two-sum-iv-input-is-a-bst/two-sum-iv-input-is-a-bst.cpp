@@ -11,20 +11,18 @@
  */
 class Solution {
 public:
-
     stack<TreeNode*>asc;
     stack<TreeNode*>desc;
-
     TreeNode* getsmall(){
         if(asc.empty()){
             return nullptr;
         }
-        TreeNode*small = asc.top();
+        TreeNode* small = asc.top();
         asc.pop();
         TreeNode* rightchild = small -> right;
         while(rightchild){
             asc.push(rightchild);
-            rightchild  = rightchild -> left;
+            rightchild = rightchild -> left;
         }
         return small;
     }
@@ -32,16 +30,15 @@ public:
         if(desc.empty()){
             return nullptr;
         }
-        TreeNode*big = desc.top();
+        TreeNode* big = desc.top();
         desc.pop();
         TreeNode* leftchild = big -> left;
         while(leftchild){
             desc.push(leftchild);
-            leftchild  = leftchild -> right;
+            leftchild = leftchild -> right;
         }
         return big;
     }
-    
 
     bool findTarget(TreeNode* root, int k) {
         if(root == nullptr){
@@ -50,7 +47,7 @@ public:
         TreeNode* t = root;
         while(t){
             asc.push(t);
-            t = t -> left;
+            t = t->left;
         }
         t = root;
         while(t){
@@ -59,9 +56,8 @@ public:
         }
         TreeNode* i = getsmall();
         TreeNode* j = getbig();
-
         while(i != nullptr && j != nullptr && i != j && i -> val <= j -> val){
-            int sum = i ->val + j -> val;
+            int sum = i->val + j->val;
             if(sum == k){
                 return true;
             }
@@ -73,7 +69,6 @@ public:
             }
         }
         return false;
-        
         
     }
 };
