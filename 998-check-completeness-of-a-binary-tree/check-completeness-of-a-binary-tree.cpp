@@ -13,9 +13,9 @@ class Solution {
 public:
     bool isCompleteTree(TreeNode* root) {
         if(root == nullptr){
-            return true;
+            return 0;
         }
-        bool nullfound = false;
+        bool nullfound  = false;
         queue<TreeNode*>q;
         q.push(root);
         while(!q.empty()){
@@ -25,16 +25,14 @@ public:
                 nullfound = true;
             }
             else{
-                if(nullfound == true){
+                if(nullfound){
                     return false;
                 }
                 q.push(t -> left);
                 q.push(t -> right);
             }
-            
         }
         return true;
-        
         
     }
 };
