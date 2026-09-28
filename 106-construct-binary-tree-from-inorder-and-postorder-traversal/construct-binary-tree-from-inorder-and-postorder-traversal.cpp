@@ -13,15 +13,15 @@ class Solution {
 public:
 int idx;
 unordered_map<int,int>mp;
-TreeNode* fun(vector<int>&inorder,vector<int>&postorder,int low, int high){
+TreeNode* fun(vector<int>&postorder,int low, int high){
     if(low > high){
         return nullptr;
     }
     TreeNode* node = new TreeNode(postorder[idx]);
     idx--;
     int id = mp[node->val];
-    node -> right = fun(inorder,postorder,id+1,high);
-    node -> left = fun(inorder,postorder,low,id-1);
+    node -> right = fun(postorder,id+1,high);
+    node -> left = fun(postorder,low,id-1);
     return node;
 }
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
@@ -29,7 +29,7 @@ TreeNode* fun(vector<int>&inorder,vector<int>&postorder,int low, int high){
         for(int i= 0;i<inorder.size();i++){
             mp[inorder[i]] = i;
         }
-        return fun(inorder,postorder,0,inorder.size()-1);
+        return fun(postorder,0,inorder.size()-1);
         
     }
 };
