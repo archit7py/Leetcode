@@ -1,13 +1,3 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
-
 class Solution {
 public:
     TreeNode* ans = nullptr;
@@ -17,7 +7,7 @@ public:
         }
         else if(node == p || node == q){
             ans = node;
-            return;
+           
         }
         else if(node -> val < p -> val ){
             fun(node -> right,p,q);
