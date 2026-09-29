@@ -17,8 +17,6 @@ public:
         if(root == nullptr){
             return res;
         }
-
-
         q.push(root);
         while(!q.empty()){
             int levelsize = q.size();
@@ -33,6 +31,7 @@ public:
                 if(t -> right != nullptr){
                     q.push(t -> right);
                 }
+
             }
             res.push_back(temp);
         }
