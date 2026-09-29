@@ -11,10 +11,10 @@
  */
 class Solution {
 public:
-TreeNode* ans = nullptr;
+TreeNode* ans;
     TreeNode* searchBST(TreeNode* root, int val) {
         if(root == nullptr){
-            return 0;
+            return 0 ;
         }
         if(root -> val == val){
             ans = root;
