@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-bool fun(TreeNode* root1, TreeNode* root2){
+bool fun(TreeNode* root1 , TreeNode* root2){
     if(root1 == nullptr && root2 == nullptr){
         return true;
     }
@@ -21,17 +21,15 @@ bool fun(TreeNode* root1, TreeNode* root2){
     if(root1 -> val != root2 -> val){
         return false;
     }
-    bool l1 = fun(root1 -> left , root2 -> right);
-    bool r2 = fun(root1 -> right, root2 -> left);
-    if(l1 == true && r2 == true){
+    int l1 = fun(root1 -> left, root2 -> right);
+    int r1 = fun(root1 -> right, root2 -> left);
+    if(l1 && r1){
         return true;
     }
     return false;
 }
     bool isSymmetric(TreeNode* root) {
-        return fun(root -> left , root -> right);
-
-
+        return fun(root->left,root->right);
         
     }
 };
