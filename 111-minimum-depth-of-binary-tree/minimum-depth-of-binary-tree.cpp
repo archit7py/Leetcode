@@ -11,28 +11,24 @@
  */
 class Solution {
 public:
-int fun(TreeNode* node){
-    if(node == nullptr){
-        return 0;
+int fun(TreeNode* root){
+    if(root == nullptr){
+        return 0 ;
     }
-    int left = fun(node -> left);
-    int right = fun(node -> right);
+    int left = fun(root -> left);
+    int right = fun(root -> right);
+
     if(left == 0){
-        return 1+right;
+        return 1 + right;
     }
     if(right == 0){
-        return 1+left;
+        return 1 + left;
     }
 
     return 1 + min(left,right);
-
-    
 }
     int minDepth(TreeNode* root) {
         return fun(root);
-       
-        
-
         
     }
 };
