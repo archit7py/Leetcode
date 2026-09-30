@@ -11,35 +11,35 @@
  */
 class Solution {
 public:
-    stack<TreeNode*>asc;
-    stack<TreeNode*>desc;
-    TreeNode* getsmall(){
-        if(asc.empty()){
-            return nullptr;
-        }
-        TreeNode* small = asc.top();
-        asc.pop();
-        TreeNode* rightchild = small -> right;
-        while(rightchild){
-            asc.push(rightchild);
-            rightchild = rightchild -> left;
-        }
-        return small;
+stack<TreeNode*>asc;
+stack<TreeNode*>desc;
+TreeNode* getsmall(){
+    if(asc.empty()){
+        return nullptr;
     }
-    TreeNode* getbig(){
-        if(desc.empty()){
-            return nullptr;
-        }
-        TreeNode* big = desc.top();
-        desc.pop();
-        TreeNode* leftchild = big -> left;
-        while(leftchild){
-            desc.push(leftchild);
-            leftchild = leftchild -> right;
-        }
-        return big;
+    TreeNode* small = asc.top();
+    asc.pop();
+    TreeNode* rightchild = small -> right;
+    while(rightchild){
+        asc.push(rightchild);
+        rightchild = rightchild -> left;
     }
+    return small;
+}
+TreeNode* getbig(){
+    if(desc.empty()){
+        return nullptr;
+    }
+    TreeNode* big = desc.top();
+    desc.pop();
+    TreeNode* leftchild = big -> left;
+    while(leftchild){
+        desc.push(leftchild);
+        leftchild = leftchild -> right;
+    }
+    return big;
 
+}
     bool findTarget(TreeNode* root, int k) {
         if(root == nullptr){
             return false;
@@ -52,20 +52,20 @@ public:
         t = root;
         while(t){
             desc.push(t);
-            t = t -> right;
+            t = t ->right;
         }
         TreeNode* i = getsmall();
         TreeNode* j = getbig();
         while(i != nullptr && j != nullptr && i != j && i -> val <= j -> val){
-            int sum = i->val + j->val;
+            int sum = i -> val + j -> val;
             if(sum == k){
                 return true;
             }
-            else if(sum > k){
-                j = getbig();
+            if(sum < k){
+                i = getsmall();
             }
             else{
-                i = getsmall();
+                j = getbig();
             }
         }
         return false;
