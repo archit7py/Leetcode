@@ -33,7 +33,7 @@ public:
             return ans[guess];
         }
         else{
-            return (ans[guess] + ans[guess+1])/2.0;
+            return double((ans[guess] + ans[guess+1]))/2;
 
         }
     
