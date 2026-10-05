@@ -38,9 +38,13 @@ public:
                 }
             }
         }
-        int ans = *max_element(dist.begin(),dist.end());
-        if(ans == INT_MAX){
-            return -1;
+        int ans = 0;
+        for(int i = 0; i < n; i++) {
+            if(dist[i] == INT_MAX) {
+                return -1;
+
+            }
+            ans = max(ans, dist[i]);
         }
 
         return ans;
