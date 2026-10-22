@@ -1,15 +1,6 @@
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
-       int sum = 0;
-        int res = 0;
-        unordered_map<int,int>f;
-        f[0] = 1;
-        for(int i = 0;i<nums.size();i++){
-            sum += nums[i];
-            int ques = sum-k;class Solution {
-public:
-    int subarraySum(vector<int>& nums, int k) {
 
         int sum = 0;  // Stores the current prefix sum
         int res = 0;  // Stores the total number of valid subarrays
@@ -40,13 +31,5 @@ public:
 
         // Return the total count of subarrays whose sum equals k
         return res;
-    }
-};
-            int freq = f[ques];
-            res += freq;
-            f[sum]++;
-        }
-        return res;
-        
     }
 };
