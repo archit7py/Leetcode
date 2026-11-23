@@ -6,7 +6,17 @@ vector<int>res;
     }
     
     void add(int num) {
-        res.push_back(num);
+        if(num == 0){
+            res.clear();
+        }
+        else if(res.empty()){
+            res.push_back(num);
+        }
+        else {
+            res.push_back(res.back() * num);
+        }
+        
+
 
          
         
@@ -16,11 +26,16 @@ vector<int>res;
         if(k > res.size()) {
         return 0;
         }
-        int product  = 1;
-        for(int i = res.size()-1; i>=(int)res.size()-k; i--){
-            product = product*res[i];
+        if(k == res.size()){
+            return res.back();
         }
-        return product;
+        int last  = res.size()-1;
+        int previous = last - k;
+
+        return res[last]/res[previous];
+       
+
+        
 
         
     }
