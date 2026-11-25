@@ -1,33 +1,18 @@
 class Solution {
 public:
-    TreeNode* ans = nullptr;
-    void fun(TreeNode* node , TreeNode* p,TreeNode* q){
-        if(node == nullptr){
-            return ;
-        }
-        else if(node == p || node == q){
-            ans = node;
-           
-        }
-        else if(node -> val < p -> val ){
-            fun(node -> right,p,q);
-        }
-        else if(node -> val > q -> val){
-            fun(node -> left,p,q);
-        }
-        else{
-            ans = node;
-            return;
-        }
-    }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if(p-> val<q->val){
-            fun(root,p,q);
+        while(root != nullptr){
+            if(root -> val < p -> val && root -> val < q-> val){
+                root = root->right;
+            }
+            else if(root -> val > p -> val && root -> val > q-> val){
+                root = root->left;
+            }
+            else{
+                return root;
+            }
         }
-        else{
-            fun(root,q,p);
-        }
-        return ans;
+        return nullptr;
         
     }
 };
