@@ -1,22 +1,24 @@
 class Solution {
 public:
+// Direction Arrays 
 int x[4] = {-1,1,0,0};
 int y[4] = {0,0,-1,1};
-bool valid(int i , int j, int n , int m){
-    if(i<0 || i>=n ||j<0 || j>=m){
+bool valid(int i , int j , int n,  int m){
+    if(i < 0 || j < 0 || i >= n || j >= m){
         return false;
     }
     return true;
 }
     int orangesRotting(vector<vector<int>>& grid) {
+        //  MULTI SOURCE BFS
         int n = grid.size();
         int m = grid[0].size();
         queue<pair<int,int>>q;
-        int fresh  = 0;
+        int fresh = 0;
         int time = 0;
-        int i, j;
-        for(int i = 0; i<n ;i++){
-            for(int j = 0; j<m ;j++){
+        int i,j;
+        for(int i = 0; i<grid.size(); i++){
+            for(int j = 0; j<grid[0].size(); j++){
                 if(grid[i][j] == 2){
                     q.push({i,j});
                     grid[i][j] = -2;
@@ -34,17 +36,15 @@ bool valid(int i , int j, int n , int m){
                 q.pop();
                 int r = p.first;
                 int c = p.second;
-                for(int k=0; k<4; k++){
-                int row = r + x[k];
-                int col = c + y[k];
-                if(valid(row,col,n,m) && grid[row][col] == 1){
-                    q.push({row,col});
-                    grid[row][col] = -2;
-                    fresh--;
+                for(int k = 0; k < 4; k++){
+                    int row = r + x[k];
+                    int col = c + y[k];
+                    if(valid(row,col,n,m) && grid[row][col] == 1){
+                        q.push({row,col});
+                        grid[row][col] = -2;
+                        fresh--;
+                    }
                 }
-            }
-            
-            
             }
         }
         if(fresh > 0){
